@@ -1,34 +1,32 @@
-import java.util.ArrayList;
-
 public class Player {
-	private ArrayList<Card> playersDeck;
+	private Deck playersDeck;
 	private int chances = 1;
 
-	public Player(ArrayList<Card> splitDeck) {
-		playersDeck = splitDeck;
+	public Player(Deck deckOfCards) {
+		playersDeck = deckOfCards;
 	}
 
 	public int getDeckSize() {
-		return playersDeck.size();
+		return playersDeck.getSize();
 	}
 
 	public void addCard(Card card) {
-		playersDeck.add(card);
+		playersDeck.addCard(card);
 	}
 
 	public Card removeTopCard() {
-		int topCardIndex = playersDeck.size() - 1;
-		Card card = playersDeck.get(topCardIndex);
-		playersDeck.remove(topCardIndex);
+		int topCardIndex = playersDeck.getSize() - 1;
+		Card card = playersDeck.getCard(topCardIndex);
+		playersDeck.removeCard(card);
 		return card;
 	}
 
 	public void takePile(Deck pile) {
-		for (int i = 0; i < pile.size();) {
-			int topCard = pile.size() - 1;
+		for (int i = 0; i < pile.getSize();) {
+			int topCard = pile.getSize() - 1;
 			Card card = pile.getCard(topCard);
 			pile.removeCard(card);
-			playersDeck.add(card);
+			playersDeck.addCard(card);
 		}
 	}
 
@@ -63,13 +61,13 @@ public class Player {
 	}
 
 	public int getSize() {
-		return playersDeck.size();
+		return playersDeck.getSize();
 	}
 
 	public boolean checkWin() {
 		boolean gameover = false;
 
-		if (playersDeck.size() == 0) {
+		if (playersDeck.getSize() == 0) {
 			gameover = true;
 		}
 		return gameover;

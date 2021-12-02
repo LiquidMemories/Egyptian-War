@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -7,151 +8,71 @@ import java.util.Collections;
  *  
  **/
 public class Deck 
-{
-	private ArrayList<Card> deck; 
-
-public Deck(){
-	deck = new ArrayList<Card>();
-}
+{	
+	ArrayList<Card> deckOfCards;
 	
-	public void intializeDeck(){
-		deck.add(Card.TWO);
-		deck.add(Card.TWO);
-		deck.add(Card.TWO);
-		deck.add(Card.TWO);
-		deck.add(Card.THREE);
-		deck.add(Card.THREE);
-		deck.add(Card.THREE);
-		deck.add(Card.THREE);
-		deck.add(Card.FOUR);
-		deck.add(Card.FOUR);
-		deck.add(Card.FOUR);
-		deck.add(Card.FOUR);
-		deck.add(Card.FIVE);
-		deck.add(Card.FIVE);
-		deck.add(Card.FIVE);
-		deck.add(Card.FIVE);
-		deck.add(Card.SIX);
-		deck.add(Card.SIX);
-		deck.add(Card.SIX);
-		deck.add(Card.SIX);
-		deck.add(Card.SEVEN);
-		deck.add(Card.SEVEN);
-		deck.add(Card.SEVEN);
-		deck.add(Card.SEVEN);
-		deck.add(Card.EIGHT);
-		deck.add(Card.EIGHT);
-		deck.add(Card.EIGHT);
-		deck.add(Card.EIGHT);
-		deck.add(Card.NINE);
-		deck.add(Card.NINE);
-		deck.add(Card.NINE);
-		deck.add(Card.NINE);
-		deck.add(Card.TEN);
-		deck.add(Card.TEN);
-		deck.add(Card.TEN);
-		deck.add(Card.TEN);
-		deck.add(Card.JACK);
-		deck.add(Card.JACK);
-		deck.add(Card.JACK);
-		deck.add(Card.JACK);
-		deck.add(Card.QUEEN);
-		deck.add(Card.QUEEN);
-		deck.add(Card.QUEEN);
-		deck.add(Card.QUEEN);
-		deck.add(Card.KING);
-		deck.add(Card.KING);
-		deck.add(Card.KING);
-		deck.add(Card.KING);
-		deck.add(Card.ACE);
-		deck.add(Card.ACE);
-		deck.add(Card.ACE);
-		deck.add(Card.ACE);
-		Collections.shuffle(deck);
+	public Deck() {
+		deckOfCards = new ArrayList<Card>();
 	}
 	
-	public ArrayList<Card> deal(int numOfPlayers){
-		ArrayList<Card> playerDeck = new ArrayList<Card>();
-		if(numOfPlayers==2){
-			int splitCards = 26;
-			for(int i=0;i<splitCards;i++){
-				int topCard = deck.size()-1;
-				playerDeck.add(deck.remove(topCard));
+	public ArrayList<Card> addFullDeckOfCards(){
+		ArrayList<Card> cardValues = new ArrayList<Card>(Arrays.asList(Card.values()));
+		
+		for (Card value : cardValues) {
+			for(int i=1;i<=4;i++){
+				deckOfCards.add(value);
 			}
-			return playerDeck;
 		}
-		else if(numOfPlayers==3){
-				int splitCards = 17;
-				for(int i=0;i<splitCards;i++){
-					int topCard = deck.size()-1;
-					playerDeck.add(deck.remove(topCard));
-				}
-			return playerDeck;
-		}
-		return playerDeck;
+		
+		return deckOfCards;
 	}
 	
+	public void shuffleDeck() {
+		Collections.shuffle(deckOfCards);
+	}
 	
 	public void addCard(Card card){
-		deck.add(card);
+		deckOfCards.add(card);
 	}
 	
 	public void removeCard(Card card){
-		deck.remove(card);
+		deckOfCards.remove(card);
 	}
 	
 	public Card getCard(int index){
-		return deck.get(index);
+		return deckOfCards.get(index);
 	}
 	
-	public int size() {
-		return deck.size();
+	public int getSize() {
+		return deckOfCards.size();
 	}
 	
-	public ArrayList<Card> getDeck(){
-		return deck;
+	public ArrayList<Card> getDeck() {
+		return deckOfCards;
 	}
-
-	public boolean checkIfFaceCard(Card card){
-		boolean faceCardPlayed = false;
+	
+	public void clear() {
+		deckOfCards.clear();
+	}
+	
+	public boolean checkIfFaceCard(Card card) {
+		boolean isFaceCard = false;
 		
-		if(card==Card.ACE){
-			faceCardPlayed=true;
+		if(card==Card.ACE) {
+			isFaceCard=true;
 		}
-		else if (card==Card.KING){
-			faceCardPlayed=true;
+		else if (card==Card.KING) {
+			isFaceCard=true;
 		}
-		else if (card==Card.QUEEN){
-			faceCardPlayed=true;
+		else if (card==Card.QUEEN) {
+			isFaceCard=true;
 		}
-		else if (card == Card.JACK){
-			faceCardPlayed=true;
+		else if (card == Card.JACK) {
+			isFaceCard=true;
 		}
-		return faceCardPlayed;
 		
+		return isFaceCard;		
 	}
-	public void printRules(){
-		System.out.println("WELCOME TO EGYPTIAN WAR!!");
-		System.out.println();
-		System.out.println("RULES OF THE GAME:");
-		System.out.println("This game is card game where two");
-		System.out.println("players battle with cards until all");
-		System.out.println("have been collected by one player. ");
-		System.out.println("Only face cards will be able to win ");
-		System.out.println("a player cards. When a player turns");
-		System.out.println("over a face card, depending on the ");
-		System.out.println("face value, the oppistie player will ");
-		System.out.println("recieve the following chances to play ");
-		System.out.println("another face card.");
-		System.out.println();
-		System.out.println("JACK = 1 CHANCE");
-		System.out.println("QUEEN = 2 CHANCES");
-		System.out.println("KING = 3 CHANCES");
-		System.out.println("ACE = 4 CHANCES");
-		System.out.println();
-		System.out.println();
-	}
-
 }
 
 
